@@ -1,0 +1,9 @@
+*.bak
+*.mov
+*.jpg
+*.png
+*.jpeg
+*.flv
+__credentials.js
+*.json
+.DS_Store
