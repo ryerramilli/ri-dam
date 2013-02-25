@@ -3,15 +3,16 @@ console.log('Loading module %s', module.filename);
 var https = require('http');
 var crypto = require('crypto');
 var shell = require('module');
+var credentials = require('./__credentials');
 var logger = require('log4js').getLogger('SWF');
 if(!logger)
     console.log('Logger could not be bootstrapped');
 else
     logger.setLevel('WARN');
 
-var access_id = 'AKIAJSAO5YHGNMW2P7NA';
-var access_key = 'YM7i4D/9T7yMRv+gx+BdyhMRBKRq5xUIf3vZEUrw';
-var awsHost = 'swf.us-east-1.amazonaws.com';
+var access_id = credentials.access.id;
+var access_key = credentials.access.key;
+var awsHost = credentials.access.host;
 
 Object['keys'] = function(obj)
 {
