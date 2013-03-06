@@ -1,0 +1,90 @@
+require('module');
+
+var domainName = 'YOUR SWF DOMAIN NAME GOES HERE';
+
+exports.config = {
+    'domain' :  {
+        'name' : domainName,
+        'workflowExecutionRetentionPeriodInDays' : '30'
+    },
+    
+    'workflows' :  [
+        
+        {
+            'defaultChildPolicy':'TERMINATE',
+            'defaultExecutionStartToCloseTimeout':'86400',
+            'defaultTaskList':{'name':'SSBITask'},
+            'defaultTaskStartToCloseTimeout':'300',
+            'domain' : domainName,
+            'name' : 'SSBI',
+            'version' : '3.0'
+        },
+        
+        {
+            'defaultChildPolicy':'TERMINATE',
+            'defaultExecutionStartToCloseTimeout':'86400',
+            'defaultTaskList':{'name':'SubmitOneTask'},
+            'defaultTaskStartToCloseTimeout':'300',
+            'domain' : domainName,
+            'name' : 'SubmitOne',
+            'version' : '1.0'
+        }
+    ],
+    
+    'activities' : [
+        
+        {
+            'name' :  'IndexAsset',
+            'version': '1.0',
+            'defaultTaskList': { 'name': 'SearchIndexAsset' },
+            'defaultTaskHeartbeatTimeout': 'NONE',
+            'defaultTaskScheduleToCloseTimeout': 'NONE',
+            'defaultTaskScheduleToStartTimeout': 'NONE',
+            'defaultTaskStartToCloseTimeout': 'NONE',
+            'domain': domainName
+        },
+        
+        {
+            'name' :  'Metadata',
+            'version': '2.0',
+            'defaultTaskList': { 'name': 'metadata' },
+            'defaultTaskHeartbeatTimeout': 'NONE',
+            'defaultTaskScheduleToCloseTimeout': 'NONE',
+            'defaultTaskScheduleToStartTimeout': 'NONE',
+            'defaultTaskStartToCloseTimeout': 'NONE',
+            'domain': domainName
+        },
+        
+        {
+            'name' :  'Metadata.AssetPack',
+            'version': '1.0',
+            'defaultTaskList': { 'name': 'metadata' },
+            'defaultTaskHeartbeatTimeout': 'NONE',
+            'defaultTaskScheduleToCloseTimeout': 'NONE',
+            'defaultTaskScheduleToStartTimeout': 'NONE',
+            'defaultTaskStartToCloseTimeout': 'NONE',
+            'domain': domainName
+        },
+        
+        {
+            'name' :  'Transcode',
+            'version': '1.0',
+            'defaultTaskList': { 'name': 'transcode' },
+            'defaultTaskHeartbeatTimeout': 'NONE',
+            'defaultTaskScheduleToCloseTimeout': 'NONE',
+            'defaultTaskScheduleToStartTimeout': 'NONE',
+            'defaultTaskStartToCloseTimeout': 'NONE',
+            'domain': domainName
+        },
+        
+        {
+            'name' :  'Upload',
+            'version': '3.0',
+            'defaultTaskHeartbeatTimeout': 'NONE',
+            'defaultTaskScheduleToCloseTimeout': 'NONE',
+            'defaultTaskScheduleToStartTimeout': 'NONE',
+            'defaultTaskStartToCloseTimeout': 'NONE',
+            'domain': domainName
+        },   
+    ]
+}

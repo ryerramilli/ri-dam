@@ -29,7 +29,7 @@ exports.s3 = function(message, sharable) {
     _self._getCanonicalizedResource = function() {
         var uriPath = '';
         var subResources = '';
-        return '/' + this._getSignableBucketName() + this._message.object.name + subResources;
+        return '/' + this._getSignableBucketName() + (this._message.object ? this._message.object.name : '') + subResources;
     }
     
     _self._getCanonicalizedHeaders = function() {
@@ -79,11 +79,11 @@ exports.s3 = function(message, sharable) {
             stringToSign += s + '\n';
         }
         function o(k) {
-            a(_self._message.object[k]?_self._message.object[k]:'');
+            a( (_self._message.object && _self._message.object[k])?_self._message.object[k]:'');
         }
         a(this._message.action);
         o('md5');
-        a(this._message.object.mimeType?this._message.object.mimeType:'');
+        a((this._message.object && this._message.object.mimeType)?this._message.object.mimeType:'');
         a(this._sharable?this._getExpiration():'');
         if(!this._sharable)a(this._getCanonicalizedHeaders());
         stringToSign += this._getCanonicalizedResource();
@@ -104,7 +104,7 @@ exports.s3 = function(message, sharable) {
             path += "?" + qs.stringify({'AWSAccessKeyId' : credentials.access.id, 'Signature' : this._getSignature(), 'Expires' : this._getExpiration()});
         }
         else {
-            headers['Authorization'] = util.format('AWS %s:%s',access_id, this._getSignature());
+            headers['Authorization'] = util.format('AWS %s:%s',credentials.access.id, this._getSignature());
         }
         
         return options = {

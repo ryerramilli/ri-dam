@@ -63,6 +63,6 @@ function getParentKeywords(keyword, onComplete) {
                 onComplete({ 'statusCode': 404, 'payload': new transport.serializers.json({})});
 }
 
-require('./../HTTP-Transport.js').bind(8889, function(activtyEvents) {
+require('./../Integration/HTTP-Transport.js').bind(8889, function(activtyEvents) {
     activtyEvents.on('/', getParentKeywords);
 });

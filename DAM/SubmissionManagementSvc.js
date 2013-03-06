@@ -3,6 +3,7 @@ var http = require('http');
 var urlHelper = require('url');
 var transport = require('./../Integration/Transport.js');
 var swf = require('./../CloudProviders/AWS/swf.js');
+var swfConfig = require('./../Config/swf-config').config;
 var util = require('util');
 var log4js = require('log4js');
 var submisisonDb = require('mysql');
@@ -80,7 +81,7 @@ function receiveSubmission(callback, submission) {
                 });
         
                 var message = {};
-                message.payload = {'domain' : 'Yerramilli-ESP', 'workflowType' : { 'name' : 'SSBI', 'version' : '3.0'}, 'workflowId' : util.format('%s-%s', submissionId, submission.kioskId), 'input' : JSON.stringify(submission)};
+                message.payload = {'domain' : swfConfig.domain.name, 'workflowType' : { 'name' : 'SSBI', 'version' : '3.0'}, 'workflowId' : util.format('%s-%s', submissionId, submission.kioskId), 'input' : JSON.stringify(submission)};
                 message.command = 'SimpleWorkflowService.StartWorkflowExecution';
     
                 function handleSwfResponse(data)

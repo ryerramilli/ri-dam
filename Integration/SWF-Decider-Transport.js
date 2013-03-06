@@ -1,4 +1,5 @@
 var swf = require('./../CloudProviders/AWS/swf.js');
+var swfConfig = require('./../Config/swf-config').config;
 var util = require('util');
 var events = require('events');
 var log4js = require('log4js');
@@ -28,7 +29,7 @@ function getDecisionTask() {
     
     var message = {
             'command' :'SimpleWorkflowService.PollForDecisionTask',
-            'payload' : {'domain' : 'Yerramilli-ESP', 'taskList' : { 'name' : 'SSBITask'} }
+            'payload' : {'domain' : swfConfig.domain.name, 'taskList' : { 'name' : 'SSBITask'} }
         };
 
     swf.send(message, function(data) {decisionQueue.emit('decisionTaskAvailable', data);});

@@ -3,7 +3,7 @@ var events = require('events');
 var assetDb = require('mysql');
 
 var logger = require('log4js').getLogger('AssetManagementWorker');
-logger.setLevel('INFO');
+logger.setLevel('DEBUG');
 
 function doSubmitAsset(submitRequest, onCompleteCallback) {
     

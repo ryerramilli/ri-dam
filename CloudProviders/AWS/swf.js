@@ -67,8 +67,7 @@ exports.send = function(message, callback, onErrorCallback) {
     headers['x-amzn-authorization'] = authString;
     headers['content-encoding'] = encoding;
     headers['content-length'] = payload.length;
-    //headers['content-type'] = 'application/json; charset=UTF-8';
-    headers['content-type'] = 'application/x-amz-json-1.0'; //<== This is frustrating.
+    headers['content-type'] = 'application/x-amz-json-1.0';
     var options = {
         'host' : awsHost,
         'method' : httpMethod,

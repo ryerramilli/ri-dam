@@ -7,3 +7,9 @@
 __credentials.js
 *.json
 .DS_Store
+
+Config/setup-s3.js
+
+Config/s3-config.js
+
+Config/swf-config.js

@@ -1,9 +1,9 @@
 console.log('Loading module %s', module.filename);
-
 var events = require('events');
 var swf = require('./../CloudProviders/AWS/swf.js');
+var swfConfig = require('./../Config/swf-config').config;
 var logger = require('log4js').getLogger('SWF-Transport');
-logger.setLevel('WARN');
+logger.setLevel('DEBUG');
 
 exports.bind = function(desiredTaskList, onBindCallback) {
     
@@ -79,7 +79,7 @@ function doDefault() {
     
     var getActivityTaskMessage = {
             'command' :'SimpleWorkflowService.PollForActivityTask',
-            'payload' : {'domain' : 'Yerramilli-ESP', 'taskList' : {'name' : taskList}}
+            'payload' : {'domain' : swfConfig.domain.name, 'taskList' : {'name' : taskList}}
         };
 
     contactWorkflowQueue(getActivityTaskMessage);
